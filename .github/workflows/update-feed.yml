@@ -11,7 +11,7 @@ permissions:
 jobs:
   build-feed:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
+    timeout-minutes: 360
 
     steps:
       - name: Checkout
@@ -29,7 +29,10 @@ jobs:
         env:
           MIN_PRICE: "2000"
           MAX_PRODUCTS: "3000"
-          REQUEST_DELAY: "1.0"
+          REQUEST_DELAY: "4.0"
+          JITTER: "2.5"
+          MAX_RETRIES: "6"
+          BACKOFF_BASE: "20"
         run: python shambala_to_prom.py
 
       - name: Commit updated feed
